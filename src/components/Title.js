@@ -2,61 +2,74 @@ import React, { useState, useEffect } from 'react'
 
 class Title extends React.Component {
   // 1st gen
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     greeting: 'Hello, world!!'
-  //   }
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      greeting: props.guest,
+      name: 'Tyler',
+      surname: 'Durden',
+    }
+  }
 
   // 2nd gen
-  state = {
-    greeting: '',
-  }
+  // state = {
+  //   greeting: '',
+  // }
 
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        greeting: "Goodbye Philippines!", 
-      })
-    }, 5000)    
-  }
+  // componentDidMount() {
+        
+  // }
+
+
+  
+
+
 
   componentDidUpdate() {
+    const { guest } = this.props
+    setTimeout(() => {
+      this.setState({
+        greeting: guest, 
+      })
+    }, 5000)    
     console.log('Updated!')
   }
 
   render() {
+
+    const { greeting } = this.state
+    // const { guest } = this.props
+
     return (
       <h1 className="greeting">
-        {this.state.greeting === '' ? (
+        {greeting === '' ? (
           `Loading...`
         ) : (
-          this.state.greeting
+         `Goodbye, ${greeting}!`
         )}
       </h1>
     )
   }
 }
 
-function Title2 () {
-  const [greeting, setGreeting] = useState('Hello, world!')
+function Title2 ({ guest }) {
+  const [greeting, setGreeting] = useState('Philippines')
 
   useEffect(() => {
     setTimeout(() => {
-      setGreeting("Goodbye Philippines!")
+      setGreeting(guest)
     }, 5000) 
-  }, [])
+  }, [guest])
 
-  useEffect(() => {
-    console.log('Updated!')
-  }, [greeting])
+  // useEffect(() => {
+  //   console.log('Updated!')
+  // }, [greeting])
 
   return (
     <h1 className="greeting">
-      {greeting}
+      Goodbye, {greeting}!
     </h1> 
   )
 }
 
-export default Title2
+export default Title

@@ -1,7 +1,17 @@
+// function createButton (color) {
+//   const button = document.createElement('button')
+//   button.style.color = color
+//   return button
+// }
+
+import { useState } from "react"
+
 const Button = (props) => {
-  const { color } = props
+  const { color, darkMode } = props
+  const [buttonLabel, setButtonLabel] = useState(props.labelWithNameThatIWant)
+  
   const onButtonClick = () => {
-    alert('Me clicked!')
+    setButtonLabel('Clicked me!')
   }
 
   // const buttons = [
@@ -17,14 +27,15 @@ const Button = (props) => {
   //   )
   // })
 
+
   return (
     <button 
       style={{
-        color,
+        backgroundColor: darkMode ? 'black' : color,
       }} 
       onClick={onButtonClick}
     >
-      Click me!
+      {buttonLabel}
     </button> 
   )
 }
